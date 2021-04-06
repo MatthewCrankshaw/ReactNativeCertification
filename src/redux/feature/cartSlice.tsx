@@ -1,14 +1,12 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSelector, createSlice} from '@reduxjs/toolkit';
 
-const initialState: any = {
-    cart: [
-        {
-            item: 'item 1', 
-            price: 10,
-            quantity: 1
-        }
-    ]
-};
+const initialState: any = [
+    {
+        name: 'item 1', 
+        price: 10,
+        quantity: 1
+    }
+];
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -21,6 +19,12 @@ const cartSlice = createSlice({
             state.cart.pop();
         }
     }
+});
+
+const selectCartEntities = (state: any) => state.cart;
+
+export const selectCartItems = createSelector(selectCartEntities, (items) => {
+    Object.values(items);
 });
 
 export const { add, remove } = cartSlice.actions;
