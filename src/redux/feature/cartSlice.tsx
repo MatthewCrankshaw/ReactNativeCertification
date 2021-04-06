@@ -10,25 +10,19 @@ const initialState: any = {
     ]
 };
 
-type cartItem = {
-    item: string,
-    price: number, 
-    quantity: number
-}
-
 const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        added(state: any, action: any) {
+        add(state: any, action: any) {
             state.cart.push(action.payload);
         },
-        removed(state: any, action: any) {
+        remove(state: any, action: any) {
             state.cart.pop();
         }
     }
 });
 
-export const { added, removed } = cartSlice.actions;
+export const { add, remove } = cartSlice.actions;
 
 export default cartSlice.reducer;
