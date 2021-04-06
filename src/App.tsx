@@ -6,19 +6,16 @@
    View,
  } from 'react-native';
  import {Provider} from 'react-redux';
- import store from './store';
+ import store from './redux/store';
  
  const App = () => {
-
-  console.log('state', store.getState().cart);
-
    return (
      <Provider store={store}>
       <SafeAreaView>
         <StatusBar />
           <View>
             <Text>
-
+              Hello world
             </Text>
           </View>
       </SafeAreaView>

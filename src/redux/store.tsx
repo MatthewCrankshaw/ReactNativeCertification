@@ -1,7 +1,7 @@
 import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 
-import cartReducer from './cartSlice';
+import cartReducer from './feature/cartSlice';
 
 const middlewares: any = [thunk];
 
@@ -16,7 +16,5 @@ const store = configureStore({
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewares)
 });
-
-store.dispatch({type: 'cart/added', payload: {item: 'item 2',price: 20,quantity: 3}});
 
 export default store; 
