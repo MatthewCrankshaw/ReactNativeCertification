@@ -10,8 +10,13 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.1.6",
+    "@reduxjs/toolkit": "^1.5.1",
     "react": "17.0.1",
-    "react-native": "0.64.0"
+    "react-native": "0.64.0",
+    "react-native-flipper": "^0.83.0",
+    "react-redux": "^7.2.3",
+    "rn-redux-middleware-flipper": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
