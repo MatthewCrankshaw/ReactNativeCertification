@@ -6,17 +6,20 @@ import productReducer from './feature/productSlice';
 
 const middlewares: any = [thunk];
 
-if (__DEV__) { // eslint-disable-line
-    const createFlipperMiddleware = require('rn-redux-middleware-flipper').default;
-    middlewares.push(createFlipperMiddleware());
+if (__DEV__) {
+  // eslint-disable-line
+  const createFlipperMiddleware = require('rn-redux-middleware-flipper')
+    .default;
+  middlewares.push(createFlipperMiddleware());
 }
 
 const store = configureStore({
-    reducer: {
-        cart: cartReducer,
-        product: productReducer
-    },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewares)
+  reducer: {
+    cart: cartReducer,
+    product: productReducer,
+  },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(middlewares),
 });
 
-export default store; 
+export default store;
