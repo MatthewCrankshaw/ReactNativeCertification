@@ -2,11 +2,10 @@ import {Picker} from '@react-native-picker/picker';
 import React, {useState} from 'react';
 import {Button, SafeAreaView, StatusBar, View} from 'react-native';
 import {useSelector} from 'react-redux';
-import CartList from '../components/CartList';
 import {selectAllProducts} from '../redux/feature/productSlice';
 import store from '../redux/store';
 
-export default function MainScreen() {
+export default function MainScreen({navigation}: any) {
   const allProducts = useSelector(selectAllProducts);
   const [selectedProduct, setSelectedProduct] = useState(allProducts[0]);
 
@@ -38,7 +37,6 @@ export default function MainScreen() {
     <View>
       <SafeAreaView>
         <StatusBar />
-        <CartList />
         <Picker
           onValueChange={(itemValue, itemIndex) => {
             setSelectedProduct(allProducts[itemIndex]);
@@ -46,6 +44,10 @@ export default function MainScreen() {
           {generateOptions()}
         </Picker>
         <Button title="Add to cart" onPress={handleAdd} />
+        <Button
+          title="Go to Cart"
+          onPress={() => navigation.navigate('CartScreen')}
+        />
       </SafeAreaView>
     </View>
   );
