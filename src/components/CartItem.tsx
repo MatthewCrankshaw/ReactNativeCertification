@@ -13,10 +13,18 @@ interface CartItemPropType {
 
 export default function CartItem(props: CartItemPropType) {
     return (
-        <View>
-            <Text>{props.item.name}</Text>
-            <Text>{props.item.price}</Text>
-            <Text>{props.item.quantity}</Text>
+        <View style={{height: 30}}>
+            <View style={{flex: 1, flexDirection: 'row'}}>
+                <View style={{marginLeft: 10, marginRight: 10}}>
+                    <Text>{props.item.name}</Text>
+                </View>
+                <View style={{marginLeft: 10, marginRight: 10}}>
+                    <Text>{props.item.price}</Text>
+                </View>
+                <View style={{marginLeft: 10, marginRight: 10}}>
+                    <Text>{props.item.quantity}</Text>
+                </View>
+            </View>
         </View>
     );
 }

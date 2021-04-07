@@ -13,18 +13,18 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         add(state: any, action: any) {
-            state.cart.push(action.payload);
+            state.push(action.payload);
         },
         remove(state: any, action: any) {
-            state.cart.pop();
+            state.pop();
         }
     }
 });
 
-const selectCartEntities = (state: any) => state.cart;
+const selectCartEntities = (state: any) => state;
 
-export const selectCartItems = createSelector(selectCartEntities, (items) => {
-    Object.values(items);
+export const selectCartItems = createSelector(selectCartEntities, (state) => {
+    return state.cart;
 });
 
 export const { add, remove } = cartSlice.actions;
