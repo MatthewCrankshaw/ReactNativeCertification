@@ -1,53 +1,48 @@
-import {Picker} from '@react-native-picker/picker';
-import React, {useState} from 'react';
-import {Button, SafeAreaView, StatusBar, View} from 'react-native';
+import React from 'react';
+import {SafeAreaView, StatusBar, Text, View} from 'react-native';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {useSelector} from 'react-redux';
+import ProductItem from '../components/ProductItem';
 import {selectAllProducts} from '../redux/feature/productSlice';
-import store from '../redux/store';
 
 export default function MainScreen({navigation}: any) {
   const allProducts = useSelector(selectAllProducts);
-  const [selectedProduct, setSelectedProduct] = useState(allProducts[0]);
-
-  const handleAdd = () => {
-    store.dispatch({
-      type: 'cart/add',
-      payload: {
-        id: selectedProduct.id,
-        name: selectedProduct.name,
-        price: selectedProduct.price,
-        quantity: 1,
-      },
-    });
-  };
 
   const generateOptions = () => {
     return allProducts.map((product: any) => {
-      return (
-        <Picker.Item
-          key={product.id}
-          label={product.name + ' $' + product.price}
-          value={product.id}
-        />
-      );
+      return <ProductItem key={product.id} product={product} />;
     });
   };
 
   return (
     <View>
       <SafeAreaView>
+        <ScrollView style={{width: '100%', height: '90%'}} bounces={true}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              backgroundColor: '0xDDDDDD',
+            }}>
+            {generateOptions()}
+          </View>
+        </ScrollView>
+        <TouchableOpacity
+          style={{
+            width: '90%',
+            backgroundColor: 'lightblue',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: 50,
+            borderRadius: 20,
+            marginLeft: '5%',
+            marginTop: 10,
+          }}
+          onPress={() => navigation.navigate('CartScreen')}>
+          <Text style={{fontWeight: 'bold', fontSize: 20}}>Checkout</Text>
+        </TouchableOpacity>
         <StatusBar />
-        <Picker
-          onValueChange={(itemValue, itemIndex) => {
-            setSelectedProduct(allProducts[itemIndex]);
-          }}>
-          {generateOptions()}
-        </Picker>
-        <Button title="Add to cart" onPress={handleAdd} />
-        <Button
-          title="Go to Cart"
-          onPress={() => navigation.navigate('CartScreen')}
-        />
       </SafeAreaView>
     </View>
   );

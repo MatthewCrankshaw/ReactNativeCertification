@@ -32,6 +32,46 @@ const initialState: product[] = [
     name: 'ICar',
     price: 159999.0,
   },
+  {
+    id: 5,
+    name: 'IPad Pro',
+    price: 159999.0,
+  },
+  {
+    id: 6,
+    name: 'IPad 6 Gen',
+    price: 159999.0,
+  },
+  {
+    id: 7,
+    name: 'IPad Air',
+    price: 159999.0,
+  },
+  {
+    id: 8,
+    name: 'IPhone 12 Case',
+    price: 32.0,
+  },
+  {
+    id: 9,
+    name: 'IPad Pro Case',
+    price: 50.0,
+  },
+  {
+    id: 10,
+    name: 'IPad Keyboard',
+    price: 50.0,
+  },
+  {
+    id: 11,
+    name: 'Ipad Pen',
+    price: 120.0,
+  },
+  {
+    id: 12,
+    name: 'Macbook Charger',
+    price: 90.0,
+  },
 ];
 
 const productSlice = createSlice({
