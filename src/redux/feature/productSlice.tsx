@@ -1,12 +1,7 @@
 import {createSelector, createSlice} from '@reduxjs/toolkit';
+import {Product} from '../../types/types';
 
-type product = {
-  id: number;
-  name: string;
-  price: number;
-};
-
-const initialState: product[] = [
+const initialState: Product[] = [
   {
     id: 0,
     name: 'MacBook Pro',
@@ -80,11 +75,11 @@ const productSlice = createSlice({
   reducers: {},
 });
 
-const allProductsSelector = (state: product[]) => state.product;
+const allProductsSelector = (state: any) => state.product;
 
 export const selectAllProducts = createSelector(
   allProductsSelector,
-  (items: product[]) => items,
+  (items: Product[]) => items,
 );
 
 export default productSlice.reducer;

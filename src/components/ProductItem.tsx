@@ -3,15 +3,10 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectCartItems} from '../redux/feature/cartSlice';
 import store from '../redux/store';
-
-type productType = {
-  id: number;
-  name: string;
-  price: number;
-};
+import {CartProduct, Product} from '../types/types';
 
 type productItemPropsType = {
-  product: productType;
+  product: Product;
 };
 
 export default function ProductItem(props: productItemPropsType) {
@@ -19,15 +14,17 @@ export default function ProductItem(props: productItemPropsType) {
     store.dispatch({
       type: 'cart/add',
       payload: {
-        id: props.product.id,
-        name: props.product.name,
-        price: props.product.price,
+        product: {
+          id: props.product.id,
+          name: props.product.name,
+          price: props.product.price,
+        },
         quantity: 1,
       },
     });
   };
 
-  const handleRemove = (id: number) => {
+  const handleRemove = () => {
     store.dispatch({type: 'cart/remove', payload: props.product.id});
   };
 
@@ -37,7 +34,9 @@ export default function ProductItem(props: productItemPropsType) {
 
   const cartItems = useSelector(selectCartItems);
 
-  const cartItem = cartItems.find((item: any) => item.id == props.product.id);
+  const cartItem = cartItems.find(
+    (item: CartProduct) => item.product.id == props.product.id,
+  );
 
   return (
     <View style={styles.productItemContainer}>
@@ -53,7 +52,7 @@ export default function ProductItem(props: productItemPropsType) {
         <View style={styles.productQuantityContainer}>
           <TouchableOpacity
             style={styles.productQuantityTouchable}
-            onPress={() => handleRemove(props.product.id)}>
+            onPress={() => handleRemove()}>
             <Text style={styles.productQuantityText}>-</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.productQuantityTouchable}>

@@ -1,14 +1,15 @@
 import {createSelector, createSlice} from '@reduxjs/toolkit';
+import {CartProduct} from '../../types/types';
 
-const initialState: any = [];
+const initialState: CartProduct[] = [];
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     add(state: any, action: any) {
-      const updated = state.find((item: any) => {
-        if (item.id == action.payload.id) {
+      const updated = state.find((item: CartProduct) => {
+        if (item.product.id == action.payload.product.id) {
           item.quantity++;
           return true;
         }
@@ -19,8 +20,8 @@ const cartSlice = createSlice({
       }
     },
     remove(state: any, action: any) {
-      const index = state.findIndex((item: any) => {
-        if (item.id == action.payload) {
+      const index = state.findIndex((item: CartProduct) => {
+        if (item.product.id == action.payload) {
           return true;
         }
       });

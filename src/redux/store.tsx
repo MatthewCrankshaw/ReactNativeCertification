@@ -1,10 +1,14 @@
-import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
+import {
+  configureStore,
+  getDefaultMiddleware,
+  Middleware,
+} from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 
 import cartReducer from './feature/cartSlice';
 import productReducer from './feature/productSlice';
 
-const middlewares: any = [thunk];
+const middlewares: Middleware[] = [thunk];
 
 if (__DEV__) {
   // eslint-disable-line

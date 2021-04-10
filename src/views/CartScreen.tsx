@@ -10,7 +10,8 @@ export default function CartScreen({navigation}: any) {
         title="Go to Shop"
         onPress={() => {
           navigation.navigate('ShopScreen');
-        }}></Button>
+        }}
+      />
     </View>
   );
 }

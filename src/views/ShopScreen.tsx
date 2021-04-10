@@ -4,12 +4,13 @@ import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {useSelector} from 'react-redux';
 import ProductItem from '../components/ProductItem';
 import {selectAllProducts} from '../redux/feature/productSlice';
+import {Product} from '../types/types';
 
 export default function MainScreen({navigation}: any) {
   const allProducts = useSelector(selectAllProducts);
 
   const generateOptions = () => {
-    return allProducts.map((product: any) => {
+    return allProducts.map((product: Product) => {
       return <ProductItem key={product.id} product={product} />;
     });
   };
