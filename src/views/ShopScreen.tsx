@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, Text, View} from 'react-native';
+import {SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {useSelector} from 'react-redux';
 import ProductItem from '../components/ProductItem';
@@ -18,28 +18,11 @@ export default function MainScreen({navigation}: any) {
   return (
     <View>
       <SafeAreaView>
-        <ScrollView style={{width: '100%', height: '90%'}} bounces={true}>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              backgroundColor: '0xDDDDDD',
-            }}>
-            {generateOptions()}
-          </View>
+        <ScrollView style={styles.productsScrollView} bounces={true}>
+          <View style={styles.productsContainer}>{generateOptions()}</View>
         </ScrollView>
         <TouchableOpacity
-          style={{
-            width: '90%',
-            backgroundColor: 'lightblue',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: 50,
-            borderRadius: 20,
-            marginLeft: '5%',
-            marginTop: 10,
-          }}
+          style={styles.cartButton}
           onPress={() => navigation.navigate('CartScreen')}>
           <Text style={{fontWeight: 'bold', fontSize: 20}}>Checkout</Text>
         </TouchableOpacity>
@@ -48,3 +31,26 @@ export default function MainScreen({navigation}: any) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  productsScrollView: {
+    width: '100%',
+    height: '90%',
+  },
+  productsContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    backgroundColor: '#DDD',
+  },
+  cartButton: {
+    width: '90%',
+    backgroundColor: 'lightblue',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 50,
+    borderRadius: 20,
+    marginLeft: '5%',
+    marginTop: 10,
+  },
+});

@@ -1,4 +1,5 @@
 import {
+  combineReducers,
   configureStore,
   getDefaultMiddleware,
   Middleware,
@@ -11,17 +12,18 @@ import productReducer from './feature/productSlice';
 const middlewares: Middleware[] = [thunk];
 
 if (__DEV__) {
-  // eslint-disable-line
   const createFlipperMiddleware = require('rn-redux-middleware-flipper')
     .default;
   middlewares.push(createFlipperMiddleware());
 }
 
+const rootReducer = combineReducers({
+  cart: cartReducer,
+  product: productReducer,
+});
+
 const store = configureStore({
-  reducer: {
-    cart: cartReducer,
-    product: productReducer,
-  },
+  reducer: rootReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(middlewares),
 });

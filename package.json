@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@babel/preset-env": "^7.1.6",
+    "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-picker/picker": "^1.14.0",
     "@react-navigation/native": "^5.9.4",
@@ -24,6 +25,7 @@
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^3.0.0",
     "react-redux": "^7.2.3",
+    "redux-persist": "^6.0.0",
     "rn-redux-middleware-flipper": "^0.1.0"
   },
   "devDependencies": {

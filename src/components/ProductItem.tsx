@@ -4,6 +4,7 @@ import {useSelector} from 'react-redux';
 import {selectCartItems} from '../redux/feature/cartSlice';
 import store from '../redux/store';
 import {CartProduct, Product} from '../types/types';
+import {moneyFormat} from '../Utils';
 
 type productItemPropsType = {
   product: Product;
@@ -26,10 +27,6 @@ export default function ProductItem(props: productItemPropsType) {
 
   const handleRemove = () => {
     store.dispatch({type: 'cart/remove', payload: props.product.id});
-  };
-
-  const moneyFormat = (value: number) => {
-    return '$' + value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
   };
 
   const cartItems = useSelector(selectCartItems);
@@ -84,6 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     margin: 3,
     display: 'flex',
+    borderRadius: 5,
   },
   productNameContainer: {
     height: 80,
