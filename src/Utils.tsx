@@ -5,6 +5,6 @@
  *
  * @return {string}
  */
-export const moneyFormat = (value: number) => {
+export const moneyFormat = (value: number): string => {
   return '$' + value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 };
