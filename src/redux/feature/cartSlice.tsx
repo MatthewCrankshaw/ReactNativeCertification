@@ -1,4 +1,5 @@
 import {createSelector, createSlice} from '@reduxjs/toolkit';
+
 import {CartProduct} from '../../types/types';
 
 const initialState: CartProduct[] = [];
@@ -35,6 +36,15 @@ const cartSlice = createSlice({
         }
       }
     },
+    delete(state: any, action: any) {
+      const index = state.findIndex((item: CartProduct) => {
+        if (item.product.id == action.payload) {
+          return true;
+        }
+      });
+
+      state.splice(index, 1);
+    },
   },
 });
 
@@ -42,6 +52,10 @@ const selectCartEntities = (state: any) => state;
 
 export const selectCartItems = createSelector(selectCartEntities, state => {
   return state.cart;
+});
+
+export const selectCartCount = createSelector(selectCartEntities, state => {
+  return state.cart.length;
 });
 
 export const {add, remove} = cartSlice.actions;

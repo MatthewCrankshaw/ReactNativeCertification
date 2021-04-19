@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useSelector} from 'react-redux';
+
 import {selectCartItems} from '../redux/feature/cartSlice';
 import store from '../redux/store';
 import {CartProduct, Product} from '../types/types';

@@ -1,28 +1,57 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Animated} from 'react-native';
 import {Swipeable, TouchableOpacity} from 'react-native-gesture-handler';
+
+import store from '../redux/store';
 import {CartProduct} from '../types/types';
 import {moneyFormat} from '../Utils';
 interface CartItemPropType {
   item: CartProduct;
-  handleRemoveItem: Function;
+  handleDelete: Function;
 }
 
 export default function CartItem(props: CartItemPropType) {
-  const renderDeleteTouchable = () => {
+  const handleAdd = () => {
+    const {product} = props.item;
+    store.dispatch({
+      type: 'cart/add',
+      payload: {
+        product: {
+          id: product.id,
+          name: product.name,
+          price: product.price,
+        },
+        quantity: 1,
+      },
+    });
+  };
+
+  const handleRemove = () => {
+    const {product} = props.item;
+    store.dispatch({type: 'cart/remove', payload: product.id});
+  };
+
+  const renderDeleteTouchable = (dragX: Animated.Value) => {
+    const translation = dragX.interpolate({
+      inputRange: [0, 1],
+      outputRange: [100, 0],
+    });
+
     return (
-      <View style={{width: 100, backgroundColor: 'red'}}>
+      <Animated.View
+        style={[
+          styles.deleteContainer,
+          {
+            transform: [{translateX: translation}],
+          },
+        ]}>
+        <View style={styles.deleteOverflow} />
         <TouchableOpacity
-          style={{
-            width: '100%',
-            height: '100%',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-          onPress={() => props.handleRemoveItem(props.item.product.id)}>
+          style={styles.touchable}
+          onPress={() => props.handleDelete(props.item.product.id)}>
           <Text>Remove</Text>
         </TouchableOpacity>
-      </View>
+      </Animated.View>
     );
   };
 
@@ -41,46 +70,19 @@ export default function CartItem(props: CartItemPropType) {
               {moneyFormat(props.item.product.price)}
             </Text>
           </View>
-          <View style={styles.listItemQuantity}>
-            <View
-              style={{
-                flex: 1,
-                backgroundColor: 'skyblue',
-              }}>
-              <TouchableOpacity
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+          <View style={styles.listItemQuantityContainer}>
+            <View style={styles.listItemQuantityButton}>
+              <TouchableOpacity style={styles.touchable} onPress={handleRemove}>
                 <Text style={{fontSize: 30}}>-</Text>
               </TouchableOpacity>
             </View>
-            <View
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: 'white',
-                borderWidth: 2,
-              }}>
+            <View style={styles.listItemQuantityButton}>
               <Text style={{fontSize: 20, fontWeight: 'bold'}}>
                 {props.item.quantity}
               </Text>
             </View>
-            <View
-              style={{
-                flex: 1,
-                backgroundColor: 'skyblue',
-              }}>
-              <TouchableOpacity
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+            <View style={styles.listItemQuantityButton}>
+              <TouchableOpacity style={styles.touchable} onPress={handleAdd}>
                 <Text style={{fontSize: 30}}>+</Text>
               </TouchableOpacity>
             </View>
@@ -100,10 +102,11 @@ const styles = StyleSheet.create({
   listItemContainer: {
     flex: 1,
     height: 80,
-    backgroundColor: '#DDD',
-    margin: 10,
+    backgroundColor: 'white',
+    margin: 3,
     borderWidth: 1,
-    borderRadius: 10,
+    borderColor: 'grey',
+    borderRadius: 5,
   },
   listItemContent: {
     flex: 1,
@@ -125,12 +128,25 @@ const styles = StyleSheet.create({
     borderColor: 'grey',
     padding: 5,
   },
-  listItemQuantity: {
+  listItemQuantityContainer: {
     flex: 1,
     flexDirection: 'row',
     borderLeftWidth: 2,
     borderColor: 'grey',
-    padding: 5,
+  },
+  listItemQuantityButton: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'skyblue',
+    borderRadius: 5,
+    margin: 3,
+  },
+  touchable: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   listItemTotal: {
     flex: 2,
@@ -138,5 +154,15 @@ const styles = StyleSheet.create({
     borderLeftWidth: 2,
     borderColor: 'grey',
     padding: 5,
+  },
+  deleteContainer: {
+    width: 100,
+  },
+  deleteOverflow: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    width: 1000,
+    backgroundColor: 'tomato',
   },
 });
