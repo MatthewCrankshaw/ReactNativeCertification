@@ -58,6 +58,15 @@ export const selectCartCount = createSelector(selectCartEntities, state => {
   return state.cart.length;
 });
 
+export const selectGrandTotal = createSelector(selectCartEntities, state => {
+  let total = 0;
+  state.cart.forEach((item: CartProduct) => {
+    total += item.product.price * item.quantity;
+  });
+
+  return total;
+});
+
 export const {add, remove} = cartSlice.actions;
 
 export default cartSlice.reducer;
