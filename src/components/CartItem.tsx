@@ -1,3 +1,9 @@
+import {
+  faMinusCircle,
+  faPlusCircle,
+  faTrashAlt,
+} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import React from 'react';
 import {View, Text, StyleSheet, Animated} from 'react-native';
 import {Swipeable, TouchableOpacity} from 'react-native-gesture-handler';
@@ -46,11 +52,18 @@ export default function CartItem(props: CartItemPropType) {
           },
         ]}>
         <View style={styles.deleteOverflow} />
-        <TouchableOpacity
-          style={styles.touchable}
-          onPress={() => props.handleDelete(props.item.product.id)}>
-          <Text>Remove</Text>
-        </TouchableOpacity>
+        <View style={{flex: 1}}>
+          <TouchableOpacity
+            style={{
+              width: '100%',
+              height: '100%',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            onPress={() => props.handleDelete(props.item.product.id)}>
+            <FontAwesomeIcon icon={faTrashAlt} size={32} />
+          </TouchableOpacity>
+        </View>
       </Animated.View>
     );
   };
@@ -96,7 +109,7 @@ export default function CartItem(props: CartItemPropType) {
               <TouchableOpacity
                 style={styles.listItemQuantityButton}
                 onPress={handleRemove}>
-                <Text style={{fontSize: 20}}>-</Text>
+                <FontAwesomeIcon icon={faMinusCircle} size={24} />
               </TouchableOpacity>
               <View style={styles.listItemQuantityView}>
                 <Text style={{fontSize: 20, fontWeight: 'bold'}}>
@@ -106,7 +119,7 @@ export default function CartItem(props: CartItemPropType) {
               <TouchableOpacity
                 style={styles.listItemQuantityButton}
                 onPress={handleAdd}>
-                <Text style={{fontSize: 20}}>+</Text>
+                <FontAwesomeIcon icon={faPlusCircle} size={24} />
               </TouchableOpacity>
             </View>
           </View>

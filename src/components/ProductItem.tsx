@@ -1,6 +1,8 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useSelector} from 'react-redux';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faPlusCircle, faMinusCircle} from '@fortawesome/free-solid-svg-icons';
 
 import {selectCartItems} from '../redux/feature/cartSlice';
 import store from '../redux/store';
@@ -51,7 +53,7 @@ export default function ProductItem(props: productItemPropsType) {
           <TouchableOpacity
             style={[styles.productQuantity, styles.productQuantityLeft]}
             onPress={() => handleRemove()}>
-            <Text style={styles.productQuantityText}>-</Text>
+            <FontAwesomeIcon icon={faMinusCircle} size={24} />
           </TouchableOpacity>
           <View style={[styles.productQuantity, styles.productQuantityView]}>
             <Text style={styles.productQuantityText}>
@@ -61,7 +63,7 @@ export default function ProductItem(props: productItemPropsType) {
           <TouchableOpacity
             style={[styles.productQuantity, styles.productQuantityRight]}
             onPress={handleAdd}>
-            <Text style={styles.productQuantityText}>+</Text>
+            <FontAwesomeIcon icon={faPlusCircle} size={24} />
           </TouchableOpacity>
         </View>
       ) : (
