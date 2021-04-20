@@ -49,17 +49,17 @@ export default function ProductItem(props: productItemPropsType) {
       {cartItem ? (
         <View style={styles.productQuantityContainer}>
           <TouchableOpacity
-            style={styles.productQuantityTouchable}
+            style={[styles.productQuantity, styles.productQuantityLeft]}
             onPress={() => handleRemove()}>
             <Text style={styles.productQuantityText}>-</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.productQuantityTouchable}>
+          <View style={[styles.productQuantity, styles.productQuantityView]}>
             <Text style={styles.productQuantityText}>
               {cartItem && cartItem.quantity}
             </Text>
-          </TouchableOpacity>
+          </View>
           <TouchableOpacity
-            style={styles.productQuantityTouchable}
+            style={[styles.productQuantity, styles.productQuantityRight]}
             onPress={handleAdd}>
             <Text style={styles.productQuantityText}>+</Text>
           </TouchableOpacity>
@@ -77,12 +77,13 @@ export default function ProductItem(props: productItemPropsType) {
 
 const styles = StyleSheet.create({
   productItemContainer: {
+    display: 'flex',
     width: '48%',
     height: 200,
     backgroundColor: 'white',
-    margin: 3,
-    display: 'flex',
-    borderRadius: 5,
+    margin: '1%',
+    elevation: 6,
+    borderRadius: 8,
   },
   productNameContainer: {
     height: 80,
@@ -99,33 +100,42 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
   },
-  productQuantityTouchable: {
+  productQuantity: {
     backgroundColor: 'skyblue',
     flex: 1,
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 2,
-    marginRight: 2,
-    borderRadius: 5,
+  },
+  productQuantityLeft: {
+    borderBottomLeftRadius: 5,
+  },
+  productQuantityRight: {
+    borderBottomRightRadius: 5,
+  },
+  productQuantityView: {
+    borderColor: 'white',
+    borderLeftWidth: 3,
+    borderRightWidth: 3,
   },
   productAddToCartTouchable: {
     backgroundColor: 'skyblue',
     width: '100%',
     height: 40,
-    borderRadius: 5,
+    borderBottomRightRadius: 5,
+    borderBottomLeftRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
   },
   productNameText: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
   },
   productPriceText: {
-    fontSize: 20,
+    fontSize: 25,
   },
   productAddToCartText: {
-    fontSize: 12,
+    fontSize: 16,
     fontWeight: 'bold',
   },
   productQuantityText: {

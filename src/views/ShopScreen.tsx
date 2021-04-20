@@ -1,13 +1,16 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {useSelector} from 'react-redux';
+
 import ProductItem from '../components/ProductItem';
+import {selectCartCount} from '../redux/feature/cartSlice';
 import {selectAllProducts} from '../redux/feature/productSlice';
 import {Product} from '../types/types';
 
 export default function MainScreen({navigation}: any) {
   const allProducts = useSelector(selectAllProducts);
+  const cartCount = useSelector(selectCartCount);
 
   const generateOptions = () => {
     return allProducts.map((product: Product) => {
@@ -15,42 +18,46 @@ export default function MainScreen({navigation}: any) {
     });
   };
 
+  const formatCartCount = () => {
+    return cartCount ? '(' + cartCount + ')' : '';
+  };
+
   return (
-    <View>
-      <SafeAreaView>
-        <ScrollView style={styles.productsScrollView} bounces={true}>
-          <View style={styles.productsContainer}>{generateOptions()}</View>
+    <SafeAreaView style={{flex: 1}}>
+      <View style={styles.productsContainer}>
+        <ScrollView bounces={true}>
+          <View style={styles.productsList}>{generateOptions()}</View>
         </ScrollView>
+      </View>
+      <View style={styles.checkoutButtonView}>
         <TouchableOpacity
-          style={styles.cartButton}
+          style={styles.cartTouchable}
           onPress={() => navigation.navigate('CartScreen')}>
-          <Text style={{fontWeight: 'bold', fontSize: 20}}>Checkout</Text>
+          <Text style={styles.checkoutText}>Checkout {formatCartCount()}</Text>
         </TouchableOpacity>
-        <StatusBar />
-      </SafeAreaView>
-    </View>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  productsScrollView: {
-    width: '100%',
-    height: '90%',
-  },
   productsContainer: {
-    flex: 1,
+    flex: 15,
+  },
+  productsList: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     backgroundColor: '#DDD',
   },
-  cartButton: {
-    width: '90%',
+  checkoutButtonView: {flex: 1, justifyContent: 'center'},
+  cartTouchable: {
+    height: '100%',
     backgroundColor: 'lightblue',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 50,
-    borderRadius: 20,
-    marginLeft: '5%',
-    marginTop: 10,
+  },
+  checkoutText: {
+    fontWeight: 'bold',
+    fontSize: 20,
   },
 });

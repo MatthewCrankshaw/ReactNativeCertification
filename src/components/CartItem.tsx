@@ -56,104 +56,127 @@ export default function CartItem(props: CartItemPropType) {
   };
 
   return (
-    <View style={styles.listItemContainer}>
-      <View style={styles.listItemContent}>
-        <Swipeable
-          containerStyle={styles.listItemContent}
-          childrenContainerStyle={styles.listItemContent}
-          renderRightActions={renderDeleteTouchable}>
+    <View style={[styles.listItemContainer, {margin: '1%'}]}>
+      <Swipeable
+        containerStyle={styles.listItemContainer}
+        childrenContainerStyle={styles.listItemContent}
+        renderRightActions={renderDeleteTouchable}>
+        <View style={styles.listItemContent}>
           <View style={styles.listItemProductName}>
-            <Text style={styles.listItemText}>{props.item.product.name}</Text>
+            <Text style={{alignSelf: 'center'}}>Product</Text>
+            <View
+              style={{
+                borderWidth: 2,
+                borderColor: 'skyblue',
+                borderRadius: 5,
+                marginRight: 5,
+                marginLeft: 5,
+              }}>
+              <Text style={styles.listItemText}>{props.item.product.name}</Text>
+            </View>
           </View>
           <View style={styles.listItemPrice}>
-            <Text style={styles.listItemText}>
-              {moneyFormat(props.item.product.price)}
-            </Text>
-          </View>
-          <View style={styles.listItemQuantityContainer}>
-            <View style={styles.listItemQuantityButton}>
-              <TouchableOpacity style={styles.touchable} onPress={handleRemove}>
-                <Text style={{fontSize: 30}}>-</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.listItemQuantityButton}>
-              <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-                {props.item.quantity}
+            <Text style={{alignSelf: 'center'}}>Price</Text>
+            <View
+              style={{
+                borderWidth: 2,
+                borderColor: 'skyblue',
+                borderRadius: 5,
+                marginRight: 5,
+                marginLeft: 5,
+              }}>
+              <Text style={styles.listItemText}>
+                {moneyFormat(props.item.product.price)}
               </Text>
             </View>
-            <View style={styles.listItemQuantityButton}>
-              <TouchableOpacity style={styles.touchable} onPress={handleAdd}>
-                <Text style={{fontSize: 30}}>+</Text>
+          </View>
+          <View style={{flex: 1, flexGrow: 1}}>
+            <Text style={{alignSelf: 'center'}}>Quantity</Text>
+            <View style={styles.listItemQuantityContainer}>
+              <TouchableOpacity
+                style={styles.listItemQuantityButton}
+                onPress={handleRemove}>
+                <Text style={{fontSize: 20}}>-</Text>
+              </TouchableOpacity>
+              <View style={styles.listItemQuantityView}>
+                <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                  {props.item.quantity}
+                </Text>
+              </View>
+              <TouchableOpacity
+                style={styles.listItemQuantityButton}
+                onPress={handleAdd}>
+                <Text style={{fontSize: 20}}>+</Text>
               </TouchableOpacity>
             </View>
           </View>
           <View style={styles.listItemTotal}>
-            <Text style={styles.listItemText}>
-              {moneyFormat(props.item.quantity * props.item.product.price)}
-            </Text>
+            <Text style={{alignSelf: 'center'}}>Total</Text>
+            <View
+              style={{borderWidth: 2, borderColor: 'skyblue', borderRadius: 5}}>
+              <Text style={styles.listItemText}>
+                {moneyFormat(props.item.quantity * props.item.product.price)}
+              </Text>
+            </View>
           </View>
-        </Swipeable>
-      </View>
+        </View>
+      </Swipeable>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   listItemContainer: {
-    flex: 1,
-    height: 80,
-    backgroundColor: 'white',
-    margin: 3,
-    borderWidth: 1,
-    borderColor: 'grey',
-    borderRadius: 5,
+    display: 'flex',
+    height: 70,
+    borderRadius: 8,
+    elevation: 10,
   },
   listItemContent: {
     flex: 1,
     flexDirection: 'row',
+    backgroundColor: 'white',
   },
   listItemText: {
     fontSize: 20,
-    paddingLeft: 20,
+    paddingLeft: 10,
   },
   listItemProductName: {
     flex: 3,
     justifyContent: 'center',
-    padding: 5,
   },
   listItemPrice: {
     flex: 2,
     justifyContent: 'center',
-    borderLeftWidth: 2,
-    borderColor: 'grey',
-    padding: 5,
   },
   listItemQuantityContainer: {
     flex: 1,
     flexDirection: 'row',
-    borderLeftWidth: 2,
-    borderColor: 'grey',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   listItemQuantityButton: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'skyblue',
-    borderRadius: 5,
-    margin: 3,
+    borderRadius: 8,
+    borderWidth: 2,
+    borderColor: 'skyblue',
+    width: 32,
   },
-  touchable: {
-    width: '100%',
-    height: '100%',
+  listItemQuantityView: {
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 8,
+    borderWidth: 2,
+    borderColor: 'skyblue',
+    width: 40,
   },
   listItemTotal: {
     flex: 2,
     justifyContent: 'center',
-    borderLeftWidth: 2,
-    borderColor: 'grey',
-    padding: 5,
+    marginRight: 5,
+    marginLeft: 5,
   },
   deleteContainer: {
     width: 100,

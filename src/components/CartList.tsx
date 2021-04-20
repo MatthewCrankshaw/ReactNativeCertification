@@ -23,7 +23,7 @@ export default function CartList(): React.ReactElement {
 
   return (
     <View style={styles.listContainer}>
-      <ScrollView style={{flex: 1}}>
+      <ScrollView>
         {items.length > 0 ? (
           renderItems()
         ) : (
@@ -35,14 +35,12 @@ export default function CartList(): React.ReactElement {
           </View>
         )}
       </ScrollView>
-      <Text style={{fontSize: 25, fontWeight: 'bold'}}></Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   listContainer: {
-    width: '100%',
-    height: '90%',
+    flex: 1,
   },
 });
