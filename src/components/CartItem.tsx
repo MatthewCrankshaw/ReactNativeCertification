@@ -8,7 +8,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Animated} from 'react-native';
 import {Swipeable, TouchableOpacity} from 'react-native-gesture-handler';
 
-import store from '../redux/store';
+import {store} from '../redux/store';
 import {CartProduct} from '../types/types';
 import {moneyFormat} from '../Utils';
 interface CartItemPropType {
@@ -61,7 +61,7 @@ export default function CartItem(props: CartItemPropType) {
               alignItems: 'center',
             }}
             onPress={() => props.handleDelete(props.item.product.id)}>
-            <FontAwesomeIcon icon={faTrashAlt} size={32} />
+            <FontAwesomeIcon icon={faTrashAlt} size={24} />
           </TouchableOpacity>
         </View>
       </Animated.View>
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     height: 70,
     borderRadius: 8,
-    elevation: 10,
+    elevation: 5,
   },
   listItemContent: {
     flex: 1,
