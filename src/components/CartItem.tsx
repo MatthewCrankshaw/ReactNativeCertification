@@ -57,12 +57,7 @@ export default function CartItem(props: CartItemPropType) {
         <View style={styles.deleteOverflow} />
         <View style={{flex: 1}}>
           <TouchableOpacity
-            style={{
-              width: '100%',
-              height: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
+            style={styles.deleteTouchable}
             onPress={() => {
               props.handleDelete(props.item.product.id);
               swipeableRef.current?.close();
@@ -83,35 +78,21 @@ export default function CartItem(props: CartItemPropType) {
         renderRightActions={renderDeleteTouchable}>
         <View style={styles.listItemContent}>
           <View style={styles.listItemProductName}>
-            <Text style={{alignSelf: 'center'}}>Product</Text>
-            <View
-              style={{
-                borderWidth: 2,
-                borderColor: 'skyblue',
-                borderRadius: 5,
-                marginRight: 5,
-                marginLeft: 5,
-              }}>
+            <Text style={styles.centered}>Product</Text>
+            <View style={styles.listItemTextContainer}>
               <Text style={styles.listItemText}>{props.item.product.name}</Text>
             </View>
           </View>
           <View style={styles.listItemPrice}>
-            <Text style={{alignSelf: 'center'}}>Price</Text>
-            <View
-              style={{
-                borderWidth: 2,
-                borderColor: 'skyblue',
-                borderRadius: 5,
-                marginRight: 5,
-                marginLeft: 5,
-              }}>
+            <Text style={styles.centered}>Price</Text>
+            <View style={styles.listItemTextContainer}>
               <Text style={styles.listItemText}>
                 {moneyFormat(props.item.product.price)}
               </Text>
             </View>
           </View>
-          <View style={{flex: 1, flexGrow: 1}}>
-            <Text style={{alignSelf: 'center'}}>Quantity</Text>
+          <View>
+            <Text style={styles.centered}>Quantity</Text>
             <View style={styles.listItemQuantityContainer}>
               <TouchableOpacity
                 style={styles.listItemQuantityButton}
@@ -119,9 +100,7 @@ export default function CartItem(props: CartItemPropType) {
                 <FontAwesomeIcon icon={faMinusCircle} size={24} />
               </TouchableOpacity>
               <View style={styles.listItemQuantityView}>
-                <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-                  {props.item.quantity}
-                </Text>
+                <Text style={styles.listItemText}>{props.item.quantity}</Text>
               </View>
               <TouchableOpacity
                 style={styles.listItemQuantityButton}
@@ -131,9 +110,8 @@ export default function CartItem(props: CartItemPropType) {
             </View>
           </View>
           <View style={styles.listItemTotal}>
-            <Text style={{alignSelf: 'center'}}>Total</Text>
-            <View
-              style={{borderWidth: 2, borderColor: 'skyblue', borderRadius: 5}}>
+            <Text style={styles.centered}>Total</Text>
+            <View style={styles.listItemTextContainer}>
               <Text style={styles.listItemText}>
                 {moneyFormat(props.item.quantity * props.item.product.price)}
               </Text>
@@ -156,6 +134,16 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     backgroundColor: 'white',
+  },
+  listItemTextContainer: {
+    borderWidth: 2,
+    borderColor: 'skyblue',
+    borderRadius: 5,
+    marginRight: 5,
+    marginLeft: 5,
+  },
+  centered: {
+    alignSelf: 'center',
   },
   listItemText: {
     fontSize: 20,
@@ -200,6 +188,12 @@ const styles = StyleSheet.create({
   },
   deleteContainer: {
     width: 100,
+  },
+  deleteTouchable: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   deleteOverflow: {
     position: 'absolute',
