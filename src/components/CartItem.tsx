@@ -4,13 +4,14 @@ import {
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import React from 'react';
+import React, {useRef} from 'react';
 import {View, Text, StyleSheet, Animated} from 'react-native';
 import {Swipeable, TouchableOpacity} from 'react-native-gesture-handler';
 
 import {store} from '../redux/store';
 import {CartProduct} from '../types/types';
 import {moneyFormat} from '../Utils';
+
 interface CartItemPropType {
   item: CartProduct;
   handleDelete: Function;
@@ -31,6 +32,8 @@ export default function CartItem(props: CartItemPropType) {
       },
     });
   };
+
+  const swipeableRef: React.Ref<Swipeable> = useRef(null);
 
   const handleRemove = () => {
     const {product} = props.item;
@@ -60,7 +63,10 @@ export default function CartItem(props: CartItemPropType) {
               justifyContent: 'center',
               alignItems: 'center',
             }}
-            onPress={() => props.handleDelete(props.item.product.id)}>
+            onPress={() => {
+              props.handleDelete(props.item.product.id);
+              swipeableRef.current?.close();
+            }}>
             <FontAwesomeIcon icon={faTrashAlt} size={24} />
           </TouchableOpacity>
         </View>
@@ -71,6 +77,7 @@ export default function CartItem(props: CartItemPropType) {
   return (
     <View style={[styles.listItemContainer, {margin: '1%'}]}>
       <Swipeable
+        ref={swipeableRef}
         containerStyle={styles.listItemContainer}
         childrenContainerStyle={styles.listItemContent}
         renderRightActions={renderDeleteTouchable}>
