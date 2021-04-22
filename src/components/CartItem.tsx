@@ -40,10 +40,14 @@ export default function CartItem(props: CartItemPropType) {
     store.dispatch({type: 'cart/remove', payload: product.id});
   };
 
-  const renderDeleteTouchable = (dragX: Animated.Value) => {
+  const renderDeleteTouchable = (
+    progress: Animated.AnimatedInterpolation,
+    dragX: Animated.AnimatedInterpolation,
+  ) => {
+    console.log(dragX);
     const translation = dragX.interpolate({
-      inputRange: [0, 1],
-      outputRange: [100, 0],
+      inputRange: [-100, 0],
+      outputRange: [0, 100],
     });
 
     return (
