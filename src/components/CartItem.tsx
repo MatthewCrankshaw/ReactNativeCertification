@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   listItemText: {
-    fontSize: 20,
+    fontSize: 16,
     paddingLeft: 10,
   },
   listItemProductName: {
