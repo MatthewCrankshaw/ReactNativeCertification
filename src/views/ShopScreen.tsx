@@ -3,7 +3,7 @@ import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {useSelector} from 'react-redux';
 
-import ProductItem from '../components/ProductItem';
+import ProductItem from '../components/Product/ProductItem/ProductItem';
 import {selectCartCount} from '../redux/feature/cartSlice';
 import {selectAllProducts} from '../redux/feature/productSlice';
 import {Product} from '../types/types';

@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import {useSelector} from 'react-redux';
-import CartList from '../components/CartList';
+import CartList from '../components/Cart/CartList/CartList';
 import {selectGrandTotal} from '../redux/feature/cartSlice';
 import {moneyFormat} from '../Utils';
 import {Header} from 'react-native-elements';

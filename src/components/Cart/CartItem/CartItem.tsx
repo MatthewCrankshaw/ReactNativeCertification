@@ -7,9 +7,9 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import React, {useRef} from 'react';
 import {View, Text, StyleSheet, Animated} from 'react-native';
 import {Swipeable, TouchableOpacity} from 'react-native-gesture-handler';
-import {store} from '../redux/store';
-import {CartProduct} from '../types/types';
-import {moneyFormat} from '../Utils';
+import {store} from '../../../redux/store';
+import {CartProduct} from '../../../types/types';
+import {moneyFormat} from '../../../Utils';
 import {Divider} from 'react-native-elements';
 
 interface CartItemPropType {

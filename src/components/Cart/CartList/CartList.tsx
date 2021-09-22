@@ -3,10 +3,10 @@ import {StyleSheet, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useSelector} from 'react-redux';
 
-import {selectCartItems} from '../redux/feature/cartSlice';
-import {store} from '../redux/store';
-import {CartProduct} from '../types/types';
-import CartItem from './CartItem';
+import {selectCartItems} from '../../../redux/feature/cartSlice';
+import {store} from '../../../redux/store';
+import {CartProduct} from '../../../types/types';
+import CartItem from '../CartItem/CartItem';
 
 export default function CartList(): React.ReactElement {
   const items = useSelector(selectCartItems);

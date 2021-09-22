@@ -7,19 +7,15 @@ import {store, persistor} from './redux/store';
 import ShopScreen from './views/ShopScreen';
 import CartScreen from './views/CartScreen';
 import {ThemeProvider, Theme} from 'react-native-elements';
-
-const theme: Theme = {
-  colors: {
-    primary: '#47bfaf',
-    secondary: '#031e45',
-  },
-};
+import {useColorScheme} from 'react-native';
+import theme from './Theme/Theme';
 
 const App = () => {
   const Stack = createStackNavigator();
+  let colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme} useDark={colorScheme === 'dark'}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <NavigationContainer>

@@ -4,10 +4,10 @@ import {useSelector} from 'react-redux';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faPlusCircle, faMinusCircle} from '@fortawesome/free-solid-svg-icons';
 
-import {selectCartItems} from '../redux/feature/cartSlice';
-import {store} from '../redux/store';
-import {CartProduct, Product} from '../types/types';
-import {moneyFormat} from '../Utils';
+import {selectCartItems} from '../../../redux/feature/cartSlice';
+import {store} from '../../../redux/store';
+import {CartProduct, Product} from '../../../types/types';
+import {moneyFormat} from '../../../Utils';
 
 type productItemPropsType = {
   product: Product;
