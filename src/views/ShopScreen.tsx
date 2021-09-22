@@ -7,6 +7,7 @@ import ProductItem from '../components/ProductItem';
 import {selectCartCount} from '../redux/feature/cartSlice';
 import {selectAllProducts} from '../redux/feature/productSlice';
 import {Product} from '../types/types';
+import {Header} from 'react-native-elements';
 
 export default function MainScreen({navigation}: any) {
   const allProducts = useSelector(selectAllProducts);
@@ -24,6 +25,12 @@ export default function MainScreen({navigation}: any) {
 
   return (
     <SafeAreaView style={{flex: 1}}>
+      <Header
+        centerComponent={{
+          text: 'React Native Certification',
+          style: {color: '#000', fontSize: 18, fontWeight: 'bold'},
+        }}
+      />
       <View style={styles.productsContainer}>
         <ScrollView bounces={true}>
           <View style={styles.productsList}>{generateOptions()}</View>

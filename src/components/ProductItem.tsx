@@ -53,7 +53,7 @@ export default function ProductItem(props: productItemPropsType) {
           <TouchableOpacity
             style={[styles.productQuantity, styles.productQuantityLeft]}
             onPress={() => handleRemove()}>
-            <FontAwesomeIcon icon={faMinusCircle} size={24} />
+            <FontAwesomeIcon icon={faMinusCircle} size={24} color="#47bfaf" />
           </TouchableOpacity>
           <View style={[styles.productQuantity, styles.productQuantityView]}>
             <Text style={styles.productQuantityText}>
@@ -63,7 +63,7 @@ export default function ProductItem(props: productItemPropsType) {
           <TouchableOpacity
             style={[styles.productQuantity, styles.productQuantityRight]}
             onPress={handleAdd}>
-            <FontAwesomeIcon icon={faPlusCircle} size={24} />
+            <FontAwesomeIcon icon={faPlusCircle} size={24} color="#47bfaf" />
           </TouchableOpacity>
         </View>
       ) : (
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   productQuantity: {
-    backgroundColor: 'skyblue',
+    backgroundColor: '#031e45',
     flex: 1,
     height: 40,
     justifyContent: 'center',
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     borderRightWidth: 3,
   },
   productAddToCartTouchable: {
-    backgroundColor: 'skyblue',
+    backgroundColor: '#031e45',
     width: '100%',
     height: 40,
     borderBottomRightRadius: 5,
@@ -139,9 +139,11 @@ const styles = StyleSheet.create({
   productAddToCartText: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: '#47bfaf',
   },
   productQuantityText: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: '#47bfaf',
   },
 });

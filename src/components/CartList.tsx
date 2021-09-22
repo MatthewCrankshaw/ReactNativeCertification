@@ -23,6 +23,39 @@ export default function CartList(): React.ReactElement {
 
   return (
     <View style={styles.listContainer}>
+      <View
+        style={{
+          display: 'flex',
+          height: 40,
+          backgroundColor: '#031e45',
+          flexDirection: 'row',
+        }}>
+        <View
+          style={{
+            flex: 3,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Text style={{fontSize: 20, fontWeight: 'bold', color: '#fff'}}>
+            Product
+          </Text>
+        </View>
+        <View style={{flex: 2, justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={{fontSize: 20, fontWeight: 'bold', color: '#fff'}}>
+            Price
+          </Text>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={{fontSize: 20, fontWeight: 'bold', color: '#fff'}}>
+            Qty
+          </Text>
+        </View>
+        <View style={{flex: 2, justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={{fontSize: 20, fontWeight: 'bold', color: '#fff'}}>
+            Total
+          </Text>
+        </View>
+      </View>
       <ScrollView>
         {items.length > 0 ? (
           renderItems()
