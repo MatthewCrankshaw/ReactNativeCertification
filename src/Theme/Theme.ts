@@ -2,8 +2,8 @@ import {Theme} from 'react-native-elements';
 
 const theme: Theme = {
   colors: {
-    primary: '#47bfaf',
-    secondary: '#031e45',
+    primary: '#031e45',
+    secondary: '#47bfaf',
   },
 };
 

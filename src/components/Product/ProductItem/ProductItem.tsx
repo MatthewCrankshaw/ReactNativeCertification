@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faPlusCircle, faMinusCircle} from '@fortawesome/free-solid-svg-icons';
@@ -8,12 +8,18 @@ import {selectCartItems} from '../../../redux/feature/cartSlice';
 import {store} from '../../../redux/store';
 import {CartProduct, Product} from '../../../types/types';
 import {moneyFormat} from '../../../Utils';
+import useStyles from './style';
+import {Divider} from 'react-native-elements';
+import {useOrientation} from '../../../hooks/useOrientation';
 
 type productItemPropsType = {
   product: Product;
 };
 
 export default function ProductItem(props: productItemPropsType) {
+  const orientation = useOrientation();
+  const styles = useStyles({orientation: orientation});
+
   const handleAdd = () => {
     store.dispatch({
       type: 'cart/add',
@@ -35,115 +41,50 @@ export default function ProductItem(props: productItemPropsType) {
   const cartItems = useSelector(selectCartItems);
 
   const cartItem = cartItems.find(
-    (item: CartProduct) => item.product.id == props.product.id,
+    (item: CartProduct) => item.product.id === props.product.id,
   );
 
   return (
-    <View style={styles.productItemContainer}>
-      <View style={styles.productNameContainer}>
-        <Text style={styles.productNameText}>{props.product.name}</Text>
+    <View style={styles.container}>
+      <View style={styles.productContainer}>
+        <Text style={styles.productText}>{props.product.name}</Text>
       </View>
-      <View style={styles.productPriceContainer}>
-        <Text style={styles.productPriceText}>
-          {moneyFormat(props.product.price)}
-        </Text>
+      <View style={styles.priceContainer}>
+        <Text style={styles.priceText}>{moneyFormat(props.product.price)}</Text>
       </View>
       {cartItem ? (
-        <View style={styles.productQuantityContainer}>
+        <View style={styles.quantityContainer}>
           <TouchableOpacity
-            style={[styles.productQuantity, styles.productQuantityLeft]}
+            style={[styles.quantityCell, styles.quantityCellLeft]}
             onPress={() => handleRemove()}>
-            <FontAwesomeIcon icon={faMinusCircle} size={24} color="#47bfaf" />
+            <FontAwesomeIcon
+              icon={faMinusCircle}
+              size={24}
+              style={styles.quantityContents}
+            />
           </TouchableOpacity>
-          <View style={[styles.productQuantity, styles.productQuantityView]}>
-            <Text style={styles.productQuantityText}>
+          <Divider width={2} orientation="vertical" />
+          <View style={styles.quantityCell}>
+            <Text style={[styles.text, styles.quantityContents]}>
               {cartItem && cartItem.quantity}
             </Text>
           </View>
+          <Divider width={2} orientation="vertical" />
           <TouchableOpacity
-            style={[styles.productQuantity, styles.productQuantityRight]}
+            style={[styles.quantityCell, styles.quantityCellRight]}
             onPress={handleAdd}>
-            <FontAwesomeIcon icon={faPlusCircle} size={24} color="#47bfaf" />
+            <FontAwesomeIcon
+              icon={faPlusCircle}
+              size={24}
+              style={styles.quantityContents}
+            />
           </TouchableOpacity>
         </View>
       ) : (
-        <TouchableOpacity
-          style={styles.productAddToCartTouchable}
-          onPress={handleAdd}>
-          <Text style={styles.productAddToCartText}>Add To Cart</Text>
+        <TouchableOpacity style={styles.addToCartCell} onPress={handleAdd}>
+          <Text style={styles.text}>Add To Cart</Text>
         </TouchableOpacity>
       )}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  productItemContainer: {
-    display: 'flex',
-    width: '48%',
-    height: 200,
-    backgroundColor: 'white',
-    margin: '1%',
-    elevation: 5,
-    borderRadius: 8,
-  },
-  productNameContainer: {
-    height: 80,
-    paddingTop: 5,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  productPriceContainer: {
-    height: 80,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  productQuantityContainer: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-  },
-  productQuantity: {
-    backgroundColor: '#031e45',
-    flex: 1,
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  productQuantityLeft: {
-    borderBottomLeftRadius: 5,
-  },
-  productQuantityRight: {
-    borderBottomRightRadius: 5,
-  },
-  productQuantityView: {
-    borderColor: 'white',
-    borderLeftWidth: 3,
-    borderRightWidth: 3,
-  },
-  productAddToCartTouchable: {
-    backgroundColor: '#031e45',
-    width: '100%',
-    height: 40,
-    borderBottomRightRadius: 5,
-    borderBottomLeftRadius: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  productNameText: {
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-  productPriceText: {
-    fontSize: 25,
-  },
-  productAddToCartText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#47bfaf',
-  },
-  productQuantityText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#47bfaf',
-  },
-});

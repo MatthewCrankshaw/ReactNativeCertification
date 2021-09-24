@@ -11,6 +11,7 @@ import {store} from '../../../redux/store';
 import {CartProduct} from '../../../types/types';
 import {moneyFormat} from '../../../Utils';
 import {Divider} from 'react-native-elements';
+import useStyles from './style';
 
 interface CartItemPropType {
   item: CartProduct;
@@ -18,6 +19,8 @@ interface CartItemPropType {
 }
 
 export default function CartItem(props: CartItemPropType) {
+  const styles = useStyles();
+
   const handleAdd = () => {
     const {product} = props.item;
     store.dispatch({
@@ -58,14 +61,18 @@ export default function CartItem(props: CartItemPropType) {
           },
         ]}>
         <View style={styles.deleteOverflow} />
-        <View style={{flex: 1}}>
+        <View>
           <TouchableOpacity
             style={styles.deleteTouchable}
             onPress={() => {
               props.handleDelete(props.item.product.id);
               swipeableRef.current?.close();
             }}>
-            <FontAwesomeIcon icon={faTrashAlt} size={24} />
+            <FontAwesomeIcon
+              icon={faTrashAlt}
+              size={24}
+              style={styles.deleteIcon}
+            />
           </TouchableOpacity>
         </View>
       </Animated.View>
@@ -73,56 +80,56 @@ export default function CartItem(props: CartItemPropType) {
   };
 
   return (
-    <View style={[styles.listItemContainer, {margin: '1%'}]}>
+    <View style={styles.container}>
       <Swipeable
         ref={swipeableRef}
-        containerStyle={styles.listItemContainer}
-        childrenContainerStyle={styles.listItemContent}
+        containerStyle={styles.container}
+        childrenContainerStyle={styles.content}
         renderRightActions={renderDeleteTouchable}>
-        <View style={styles.listItemContent}>
-          <View style={styles.listItemProductName}>
-            <Text style={styles.listItemText}>{props.item.product.name}</Text>
+        <View style={styles.content}>
+          <View style={styles.productCell}>
+            <Text style={[styles.text, styles.paddedText]}>
+              {props.item.product.name}
+            </Text>
           </View>
           <Divider width={2} orientation="vertical" />
-          <View style={styles.listItemPrice}>
+          <View style={styles.priceCell}>
             <View>
-              <Text style={styles.listItemText}>
+              <Text style={[styles.text, styles.paddedText]}>
                 {moneyFormat(props.item.product.price)}
               </Text>
             </View>
           </View>
           <Divider width={2} orientation="vertical" />
           <View>
-            <View style={styles.listItemQuantityContainer}>
+            <View style={styles.quantityCell}>
               <TouchableOpacity
-                style={styles.listItemQuantityButton}
+                style={styles.quantityButton}
                 onPress={handleAdd}>
                 <FontAwesomeIcon
                   icon={faPlusCircle}
                   size={24}
-                  color="skyblue"
+                  style={styles.quantityIcon}
                 />
               </TouchableOpacity>
               <View>
-                <Text style={styles.listItemQuantityText}>
-                  {props.item.quantity}
-                </Text>
+                <Text>{props.item.quantity}</Text>
               </View>
               <TouchableOpacity
-                style={styles.listItemQuantityButton}
+                style={styles.quantityButton}
                 onPress={handleRemove}>
                 <FontAwesomeIcon
                   icon={faMinusCircle}
                   size={24}
-                  color="skyblue"
+                  style={styles.quantityIcon}
                 />
               </TouchableOpacity>
             </View>
           </View>
           <Divider width={2} orientation="vertical" />
-          <View style={styles.listItemTotal}>
+          <View style={styles.totalCell}>
             <View>
-              <Text style={styles.listItemText}>
+              <Text style={[styles.text, styles.paddedText]}>
                 {moneyFormat(props.item.quantity * props.item.product.price)}
               </Text>
             </View>
@@ -132,67 +139,3 @@ export default function CartItem(props: CartItemPropType) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  listItemContainer: {
-    display: 'flex',
-    height: 80,
-    borderWidth: 1,
-    borderColor: 'lightgrey',
-    borderRadius: 5,
-  },
-  listItemContent: {
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: 'white',
-  },
-  listItemText: {
-    fontSize: 16,
-    paddingLeft: 10,
-  },
-  listItemQuantityText: {
-    textAlign: 'center',
-  },
-  listItemProductName: {
-    flex: 3,
-    padding: 3,
-    justifyContent: 'center',
-  },
-  listItemPrice: {
-    flex: 2,
-    justifyContent: 'center',
-  },
-  listItemQuantityContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  listItemQuantityButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 3,
-  },
-  listItemTotal: {
-    flex: 2,
-    justifyContent: 'center',
-    marginRight: 5,
-    marginLeft: 5,
-  },
-  deleteContainer: {
-    width: 100,
-  },
-  deleteTouchable: {
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  deleteOverflow: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    width: 1000,
-    backgroundColor: 'tomato',
-  },
-});
