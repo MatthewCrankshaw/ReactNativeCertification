@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme: Theme, props: any) => {
       alignItems: 'center',
     },
     productText: {
-      fontSize: 30,
+      fontSize: 20,
       fontWeight: 'bold',
     },
     priceText: {
