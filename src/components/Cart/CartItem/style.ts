@@ -3,13 +3,14 @@ import {makeStyles, Theme} from 'react-native-elements';
 const useStyles = makeStyles((theme: Theme, props: any) => ({
   container: {
     display: 'flex',
-    height: 80,
-    borderWidth: 1,
+    margin: 3,
+    elevation: 5,
+    backgroundColor: theme.colors?.white,
+    borderRadius: 5,
   },
   content: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: theme.colors?.white,
   },
   text: {
     fontSize: 14,

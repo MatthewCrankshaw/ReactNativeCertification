@@ -9,12 +9,14 @@ const useStyles = makeStyles((theme: Theme, props: any) => ({
     height: 40,
     backgroundColor: theme.colors?.secondary,
     flexDirection: 'row',
+    margin: 3,
+    borderRadius: 5,
   },
   productCell: {
     flex: 2,
     justifyContent: 'center',
     alignItems: 'flex-start',
-    paddingLeft: 10,
+    paddingLeft: 5,
   },
   priceCell: {
     flex: 1,

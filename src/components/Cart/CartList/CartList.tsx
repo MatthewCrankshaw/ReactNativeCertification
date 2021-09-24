@@ -26,7 +26,6 @@ export default function CartList(): React.ReactElement {
 
   return (
     <View style={styles.container}>
-      <Divider width={2} orientation="horizontal" />
       <View style={styles.headerContainer}>
         <Divider width={2} orientation="vertical" />
         <View style={styles.productCell}>
