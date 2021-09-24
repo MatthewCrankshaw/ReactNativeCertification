@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme, props: any) => ({
   headerText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: theme.colors?.black,
+    color: theme.colors?.primary,
   },
   placeholderContainer: {
     flex: 1,
